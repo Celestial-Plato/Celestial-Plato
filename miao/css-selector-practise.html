@@ -5,9 +5,31 @@
     <meta charset="utf-8">
     <title>Document</title>
     <style>
+      body > p:first-child {
+        color: red;
+      }
+      p[class="a"]:focus {
+        color:blue;
+      }
+      p[class="a"]:hover {
+        color:red;
+      }
+      p[class="a"]:active {
+        color: green;
+      }
+      p span {
+        color:red;
+      }
+      p span span {
+        color: green;
+      }
+      p span span:nth-child(2) {
+        color: blue;
+      }
       a:link {
         color: pink;
       }
+
       a[href^="mailto:" i] {
         color:blue;
       }
