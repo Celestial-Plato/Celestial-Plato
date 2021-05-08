@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>css-block-layout</title>
+		<style>
+				body {
+						margin: 0;
+				}
+
+				header {
+						background-color: black;
+						min-width: 700px;
+						/*margin-bottom: 20px;*/
+				}
+				p.p1 {
+						color:white;
+						margin: auto;
+						width: 600px;
+
+				}
+
+				.p2 {
+						width: 600px;
+						margin-left: auto;
+						margin-right: auto;
+            margin-bottom: 16px;
+				}
+		div div:hover {
+        background-color: red;
+		}
+		div div {
+				box-sizing: border-box;
+				width: 180px;
+				height: 40px;
+				display: block;
+				border: 3px solid;
+				background-color: pink;
+				margin-bottom: 15px;
+				text-align: center;
+				line-height: 34px;
+	}
+		div:nth-child(n+5) {
+				margin-left: 210px;
+		}
+		div:nth-child(n+9) {
+				margin-left: 420px;
+		}
+		div:nth-child(4n+5) {
+				margin-top: -220px;
+		}
+
+		.p3 {
+				border-bottom: 1px dotted;
+        width: 600px;
+        margin: 0 auto;
+		}
+
+		.p4 {
+        border-bottom: none;
+        width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+		}
+
+		.p5 {
+				background-color: violet;
+				text-align: center;
+		}
+
+		div#d1 {
+        margin-bottom: 20px;
+				margin-right: auto;
+				margin-left: auto;
+				width: 600px;
+		}
+		.p4 {
+        margin-bottom: 20px;
+		}
+		</style>
+</head>
+<body style="">
+<header><p class="p1">hello world 请调整浏览器窗口大小查看效果</p></header>
+<p class="p2">页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px</p>
+<div id="d1">
+		<div>宽180高40(包含边框)</div>
+		<div>水平间隙30px</div>
+		<div>垂直间隙15px</div>
+		<div>边框宽度3px</div>
+		<div>产品</div>
+		<div>产品</div>
+		<div>产品</div>
+		<div>产品</div>
+		<div>产品</div>
+		<div>产品</div>
+		<div>产品</div>
+		<div>产品</div>
+</div>
+<p class="p3">link</p>
+<p class="p3">link</p>
+<p class="p3">link</p>
+<p class="p3">link</p>
+<p class="p3 p4">link</p>
+<p class="p5">©版权所有<br>本页所有布局均使用块元素</p>
+
+</body>
+</html>
