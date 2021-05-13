@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>heart</title>
+		<style>
+				body {
+						font-family: Lisbeth;
+						margin: 0;
+            background-image: url("许之戏.png");
+						background-repeat: no-repeat;
+						background-size: cover;
+				}
+				div {
+						text-align: center;
+						margin: auto;
+
+				}
+				.click {
+            width: 100px;
+            height: 100px;
+            background-image: url("web_heart_animation.png");
+            /*background-position: left 100px top 100px;*/
+				}
+				.hover  {
+						width: 100px;
+						height: 100px;
+						background-image: url("web_heart_animation.png");
+
+				}
+				.hover:hover {
+            /*visibility: hidden;*/
+            transition: background-position 2s steps(28);
+            background-position: left -2800px top 0;
+            background-image: url("web_heart_animation.png");
+        }
+				.click:active {
+            background-position: left -2800px top 0;
+            transition: background-position 1s steps(28);
+            background-image: url("web_heart_animation.png");
+
+				}
+
+
+		</style>
+</head>
+<body>
+
+			<div class="hover">hover</div>
+			<div class="click">click</div>
+
+</body>
+</html>
