@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>css-menu</title>
+		<style>
+				body {
+						box-sizing: border-box;
+						background-color: black;
+						font-family: 方正北魏楷书_GBK;
+				}
+				.logo {
+             width: 16px;
+             display: inline-block;
+             vertical-align: middle;
+             margin: 5px 10px 10px 5px;
+             height: 16px;
+             background-image: url("./logo.png");
+         }
+				div > ul {
+						/*vertical-align: center;*/
+						width: 500px;
+						height: 26px;
+						border: floralwhite 1px solid;
+						margin:  auto;
+						padding: 0;
+						/*line-height: 26px;*/
+				}
+				li.menu {
+						position: relative;
+						color: white;
+						width: 60px;
+						height: 16px;
+						display: inline-block;
+            /*margin: 5px 15px 5px 5px;*/
+				}
+        .menu:hover {
+            background-color: cornflowerblue;
+        }
+
+				li nav li {
+						position: relative;
+				}
+				.sub  {
+						display: none;
+						/*padding: 0;*/
+						list-style: none;
+            position: absolute;
+						width: 100px;
+						top: -1px;
+						right: -100px;
+						border:  1px solid;
+						box-sizing: border-box;
+						padding: 5px;
+				}
+				nav > li:hover .sub{
+						display:block;
+				}
+
+				 /*ul.nav  {*/
+				.menu > ul {
+						position: absolute;
+						padding: 5px;
+						top: 21px;
+						left: -1px;
+						list-style: none;
+						border-radius: 1px;
+						border: 1px solid white;
+						 display: none;
+						width: 100px;
+						/*visibility: hidden;*/
+				}
+
+				 li.menu:hover > .nav {
+						 display: block;
+				}
+				 li li:hover > .sub {
+             display: block;
+				 }
+
+		</style>
+</head>
+<body>
+		<div class="container">
+				<ul >
+<!--						<img src="./logo.png" alt="">-->
+						<li class="logo"></li>
+						<li class="menu">File
+								<ul class="nav">
+										<li>New
+												<ul class="sub">
+														<li>HTML File</li>
+														<li>Stylesheet</li>
+														<li>JavaScript File</li>
+														<li>HTTP Request</li>
+												</ul>
+										</li>
+										<li>Setting
+												<ul class="sub">
+												<li> Appearance</li>
+												<li>Menus and Toolbars</li>
+												<li>System Setting</li>
+												<li>Quick Lists</li>
+										</ul></li>
+										<li>Navigate</li>
+										<li>Code</li>
+										<li>Export</li>
+										<li>Print</li>
+								</ul>
+						</li>
+						<li class="menu">Edit
+								<ul class="nav">
+										<li>Cut</li>
+										<li>Copy</li>
+										<li>Paste</li>
+										<li>Delete</li>
+										<li>Find</li>
+										<li>Redo</li>
+								</ul>
+						</li>
+						<li class="menu">View
+								<ul class="nav">
+										<li>Tool Window</li>
+										<li>Appearance</li>
+										<li>Quick Definition</li>
+										<li>Open in Browser</li>
+										<li>Rencent File</li>
+										<li>Active Editor</li>
+								</ul>
+						</li>
+						<li class="menu">Tools
+						</li>
+						<li class="menu">Code
+						</li>
+				</ul>
+		</div>
+</body>
+</html>
