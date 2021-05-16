@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>Title</title>
+
+		<style>
+				.container > label {
+						display: block;
+						box-shadow:  inset rgb(197,197,197) 0 0 3px;
+            height: 155px;
+						width: 270px;
+						background-color: floralwhite;
+						border-radius: 1000px;
+						/*border: green 2px solid;*/
+						position: relative;
+				}
+				.container label span {
+
+						background-color: white;
+						box-shadow: rgb(197,197,197) 0 0 30px ;
+						display: inline-block;
+						border-radius: 2000px;
+						height: 135px;
+						width: 119px;
+						padding: 0 8px;
+						position: absolute;
+						left: 10px;
+						top: 10px;
+
+				}
+				input:checked ~ label > span {
+						left: 128px;
+						transition: padding 0.1s 0.1s, width 0.1s, left 0.2s;
+						width: 135px;
+						padding: 0 0;
+				}
+				input:checked ~.father {
+						box-shadow:  inset lawngreen 60px 0 0 80px ;
+						transition: box-shadow 0.5s;
+				}
+				input {
+						display: none;
+				}
+		</style>
+</head>
+<body>
+
+			<div class="container">
+					<input type="checkbox" id="ios">
+					<label class="father" for="ios">
+							<span>
+
+							</span>
+					</label>
+			</div>
+</body>
+</html>
