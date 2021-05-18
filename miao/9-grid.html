@@ -5,9 +5,10 @@
     <title>9-grid</title>
     <style>
         table {
+            margin: auto;
             border-collapse: collapse;
-            width: 99px;
-            height: 99px;
+            width: 300px;
+            height: 300px;
             text-align: center;
         }
         tr {
@@ -21,12 +22,52 @@
             border: 3px solid red;
             /*position: absolute;*/
         }
-
+        .pseudo-element {
+            margin: auto;
+            border-collapse: collapse;
+            width: 300px;
+            height: 300px;
+            text-align: center;
+            position: relative;
+        }
+        .pseudo-element td {
+            height: 100px;
+            width: 100px;
+            position: relative;
+            border: 3px solid mediumslateblue;
+        }
+        .pseudo-element td:hover::after{
+            content:'';
+            position:absolute;
+            top:-3px;
+            left:-3px;
+            width:96px;
+            height:102px;
+            border:3px solid red;
+        }
 
     </style>
 </head>
 <body>
     <table>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+        </tr>
+    </table>
+    <br>
+    <table class="pseudo-element">
         <tr>
             <td>1</td>
             <td>2</td>
