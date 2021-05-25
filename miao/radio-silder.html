@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>Title</title>
+		<style>
+        img {
+            border-radius: inherit;
+            width: 100%;
+		        height: 100%;
+            position: absolute;
+        }
+				img:nth-child(1),img:nth-child(3),img:nth-child(5) {
+						left: 100%;
+				}
+        img:nth-child(2),img:nth-child(4),img:nth-child(6) {
+            left: 0;
+        }
+        div {
+            border-radius: 4px;
+            width:960px;
+            height:540px;
+            background-color:floralwhite;
+            border: 1px solid black;
+            position:relative;
+		        overflow: hidden;
+		        /*transition: left 10s;*/
+		        margin: auto;
+        }
+
+        input:nth-child(1):checked ~ div img:nth-child(1),input:nth-child(2):checked ~ div img:nth-child(3),input:nth-child(3):checked ~ div img:nth-child(5) {
+		        z-index: 10;
+            transition: 1s linear;
+		        left: 0;
+        }
+        input:nth-child(1):checked ~ div img:nth-child(6),input:nth-child(2):checked ~ div img:nth-child(2),input:nth-child(3):checked ~ div img:nth-child(4) {
+		        left: -960px;
+		        transition: 1s linear;
+		        z-index:100;
+        }
+
+        label  {
+		        width: 16px;
+		        height: 16px;
+		        margin: 20px;
+		        display: inline-block;
+		        border-radius: 3px;
+		        background-color: black;
+		        box-shadow: cornflowerblue  0 0 2px ;
+		        color: white;
+            border: 1px white solid;
+        }
+
+        section {
+            width:960px;
+            height:540px;
+		        margin: auto;
+		        position: relative;
+        }
+        section span {
+            /*position: absolute;*/
+            margin: auto;
+            width: 200px;
+		        position: absolute;
+		        z-index: 1000;
+            right: 0;
+            left: 0;
+            bottom: 0;
+        }
+        input {
+		        display: none;
+        }
+		</style>
+</head>
+<body>
+		<section>
+		<input type="radio" name="icon" id="icon-I">
+		<input type="radio" name="icon" id="icon-II">
+		<input type="radio" name="icon" id="icon-III" checked>
+				<span><label for="icon-I"></label>
+						<label for="icon-II"></label>
+						<label for="icon-III"></label></span>
+
+		<div>
+
+				<img src="https://pic1.zhimg.com/50/c7ad985268e7144b588d7bf94eedb487_hd.jpg?source=1940ef5c" alt="">
+				<img src="https://pic1.zhimg.com/50/c7ad985268e7144b588d7bf94eedb487_hd.jpg?source=1940ef5c" alt="">
+				<img src="https://pic1.zhimg.com/50/v2-e5427c1e9ad8aaad99d643e7bd7e927b_hd.jpg?source=1940ef5c" alt="">
+				<img src="https://pic1.zhimg.com/50/v2-e5427c1e9ad8aaad99d643e7bd7e927b_hd.jpg?source=1940ef5c" alt="">
+				<img src="https://pic4.zhimg.com/50/v2-f85f658e4f785d48cf04dd8f47acc6fa_hd.jpg?source=1940ef5c" alt="">
+				<img src="https://pic4.zhimg.com/50/v2-f85f658e4f785d48cf04dd8f47acc6fa_hd.jpg?source=1940ef5c" alt="">
+		</div>
+		</section>
+</body>
+</html>
