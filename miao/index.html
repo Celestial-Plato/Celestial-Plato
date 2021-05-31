@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>index</title>
+		<link rel="stylesheet" href="icon-font.css">
+		<style>
+				body {
+
+						margin: 0;
+				}
+				.container {
+						font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;;
+						min-width: 1226px;
+						height: 40px;
+            background-color: #42484B;
+				}
+				.header {
+						margin: 0 auto;
+						font-size: 12px;
+						width: 1226px;
+				}
+				menu {
+						float:left;
+						line-height: 40px;
+				}
+				.container a,a:visited {
+						color: #B4AFA7;
+						display: inline-block;
+						line-height: 40px;
+						text-decoration: none;
+				}
+				 .container a:hover {
+             color: rgb(242, 240, 237);
+				 }
+				 .container span:after {
+						 margin: 0 0.3em;
+						 content: "|";
+						 color: #4E5558;
+				 }
+				.info {
+              float: right;
+              line-height: 40px;
+          }
+				 .cart {
+						 position: relative;
+						 display: inline-block;
+						 width: 120px;
+						 line-height: 40px;
+						 margin-left: 15px;
+						 float: right;
+             background-color: #4E5558;
+						 text-align: center;
+				 }
+
+				 .cart::before {
+						 content: '\E60C';
+						 font-family: "icon-name";
+             color: #B4AFA7;
+						 font-size: 20px;
+						vertical-align: -4px;   /*这边有些关于幽灵节点的问题*/
+				 }
+				 .info a {
+						 padding: 0 5px;
+				 }
+				 /*.cart:hover {*/
+					/*	 color: rgb(200,121,67) !important;*/
+					/*	 background-color: rgb(242,240,237);*/
+				 /*}*/
+				.cart:hover {}
+				 .cart-menu {
+						 width: 316px;
+						 position: absolute;
+						 right: 0;
+						 top: 40px;
+						 height: 0;
+						 background-color: rgb(242, 240, 237);
+             box-shadow: 0 2px 10px rgba(0,0,0,0.2)
+				 }
+				 .container-I {
+						 width: 1226px;
+						 margin: 0 auto;
+						 height: 100px;
+						 /*position: relative;*/
+				 }
+				 .logo {
+						 width: 62px;
+						 margin-top: 22px;
+						 height: 56px;
+						 float: left;
+						 display: inline-block;
+						 background-image: url("https://s02.mifile.cn/assets/static/image/logo-mi2.png");
+						 background-size: 56px 56px;
+						 background-repeat: no-repeat;
+				 }
+				 ul {
+
+				 }
+				 .site-header {
+						 position: relative;
+				 }
+				.mainlist {
+            padding: 12px 0 0 30px;
+            width: 1130px;
+            height: 88px;
+            float: left;
+            margin: 0;
+						list-style: none;
+						float: left;
+				}
+				.mainlist li {
+						display: inline-block;
+						float: left;
+						color: black;
+				}
+				.mainlist li a,.mainlist li a:visited {
+						color:black;
+						text-decoration: none;
+				}
+				.item {
+            padding:26px 10px 38px;
+				}
+				.category {
+						padding-right: 15px;
+						width: 127px;
+						height: 88px;
+				}
+				.search {
+						/*float: right;*/
+						position:absolute;
+						right: 0;
+						margin-top: 25px;
+						width: 292px;
+						height: 50px;
+
+				}
+				input.text {
+            border-radius: 2px;
+						width: 223px;
+						height: 48px;
+						padding: 0 10px;
+						border: 1px solid rgb(224,224,224);;
+				}
+				input.icon {
+            border-radius: 2px;
+						font-family: "icon-name";
+            font-size: 24px;
+						line-height: 24px;
+						width: 52px;
+						height:50px;
+            background-color: #fff;
+						border: 1px solid rgb(224,224,224);
+						position: absolute;
+						right: 0;
+				}
+					.main {
+              width: 1226px;
+              height: 460px;
+							margin: auto;
+							/*border: 1px solid black;*/
+					}
+				.list {
+						float: left;
+						width: 234px;
+						height: 460px;
+            background-color: rgba(105,101,101,.6);
+						color: #fff;
+				}
+				.list li:hover {
+            background-color: #ff6700;
+				}
+				li {
+						font-size: 14px;
+						list-style: none;
+				}
+				.main-ul {
+						position: relative;
+						margin: 0;
+						padding: 20px 0;
+				}
+				.main-ul li a,li a:visited {
+						position: relative;
+						display: block;
+						padding-left: 30px;
+						color: white;
+            font-size: 14px;
+            height: 42px;
+            line-height: 42px;
+						text-decoration: none;
+				}
+				li a span {
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            font-size: 16px;
+            line-height: 16px;
+				}
+				li a span::before {
+						content:'\E623';
+						font-family: "icon-name";
+				}
+				li div.father {
+						display: none;
+						color: black;
+						top: 0;
+						width: 992px;
+						flex-direction: column;
+						height: 458px;
+            border: 1px solid #e0e0e0;
+						border-left: 0;
+            background-color: white;
+						position: absolute;
+						left: 234px;
+						flex-wrap: wrap;
+        }
+				li div div {
+						padding: 18px 20px;
+            width: 225px;
+            height: 40px;
+				}
+				.thumb {
+            width: 40px;
+            height: 40px;
+						float: left;
+						margin-right: 12px;
+				}
+				.text {
+            width: 172px;
+            line-height: 40px;
+						float: left;
+				}
+				li:hover div.father {
+            display: flex;
+				}
+				.item-container {
+						position: absolute;
+						top: 100px;
+						width: 100%;
+						left:0;
+            background-color: red;
+				}
+		</style>
+</head>
+<body>
+		<div class="container">
+				<div class="header">
+						<div class="menu">
+						<span><a href="">小米商城</a></span>
+						<span><a href="">MIUI</a></span>
+						<span><a href="">IoT</a></span>
+						<span><a href="">云服务</a></span>
+						<span><a href="">天星数科</a></span>
+						<span><a href="">有品</a></span>
+						<span><a href="">小爱开放平台</a></span>
+						<span><a href="">企业团购</a></span>
+						<span><a href="">资质证照</a></span>
+						<span><a href="">协议规则</a></span>
+						<span><a href="">下载App</a></span>
+						<span><a href="">智能生活</a></span>
+						<span><a href="">Select Location</a></span>
+						<div class="cart">
+								<a href="">购物车（0）</a>
+								<div class="cart-menu">
+
+								</div>
+						</div>
+								<div class="info">
+										<a href="">登录</a>
+										<a href="">注册</a>
+										<a href="" style="padding: 0 10px">消息通知</a>
+								</div>
+						</div>
+				</div>
+		</div>
+		<div class="site-header">
+				<div class="container-I">
+						<div class="logo">
+						</div>
+						<ul class="mainlist">
+								<li class="category"></li>
+								<li class="item"><a href="">小米手机</a><div class="item-container">
+										<div class="item-menu"></div>
+								</div></li>
+								<li class="item"><a href="">Redmi 红米</a></li>
+								<li class="item"><a href="">电视</a></li>
+								<li class="item"><a href="">笔记本</a></li>
+								<li class="item"><a href="">家电</a></li>
+								<li class="item"><a href="">路由器</a></li>
+								<li class="item"><a href="">智能硬件</a></li>
+								<li class="item"><a href="">服务</a></li>
+								<li class="item"><a href="">社区</a></li>
+						</ul>
+						<form class="search">
+								<input type="text" class="text">
+								<input type="submit" value="" class="icon">
+						</form>
+				</div>
+		</div>
+		<div class="main">
+				<div class="list">
+							<ul class="main-ul">
+									<li><a href="">手机 电话卡<span></span></a>
+									<div class="father">
+											<div><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ab345272bf9894bb8269d4901344b068.png?thumb=1&w=48&h=48&f=webp&q=90" alt="" class="thumb">
+											<span class="text">小米MIX FOLD</span></div><div>
+											<img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a1241b5a94ba1739e85f72d46592af0e.png?thumb=1&w=48&h=48&f=webp&q=90" alt="" class="thumb">
+											<span class="text">小米11 Ultra</span></div>
+											<div><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6cf44dfe89111cb35e1a2211481ff546.png?thumb=1&w=48&h=48&f=webp&q=90" alt="" class="thumb">
+											<span class="text">小米11 Pro</span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+											<div><img src="" alt="" class="thumb">
+											<span class="text"></span></div>
+
+									</div></li>
+									<li><a href="">电视 盒子<span></span></a></li>
+									<li><a href="">笔记本 显示器<span></span></a></li>
+									<li><a href="">家电 插线板<span></span></a></li>
+									<li><a href="">出行 穿戴<span></span></a></li>
+									<li><a href="">智能 路由器<span></span></a></li>
+									<li><a href="">电源 配件<span></span></a></li>
+									<li><a href="">健康 儿童<span></span></a></li>
+									<li><a href="">耳机 音响<span></span></a></li>
+									<li><a href="">生活 箱包<span></span></a></li>
+							</ul>
+				</div>
+		</div>
+</body>
+</html>

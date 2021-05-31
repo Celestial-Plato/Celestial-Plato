@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>smile</title>
+		<style>
+				div {
+						border-radius: 50%;
+						margin: auto;
+            width: 200px;
+            height: 200px;
+						box-shadow: 0 0 30px -3px #ccc;
+				}
+				span {
+            box-shadow: 0 0 30px -3px #a4a3a3;
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+        }
+
+				.df:hover {
+						transition: 30s linear;
+						transform: rotate(3600deg);
+				}
+				.df:hover .first {
+						transition: 30s linear;
+						transform: rotate(-3600deg);
+				}
+				div {margin-top: 100px}
+
+				.second {
+						position: absolute;
+						left: 0;
+						right: 0;
+						bottom: 0;
+						top: 0;
+						margin: auto;
+				}
+				.ds {
+						position: relative;
+				}
+				/*.ds:hover .second {*/
+        /*    transition: 3s linear;*/
+        /*    transform:rotate(360deg)translateY(-100px)rotate(-360deg);*/
+				/*}*/
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg) translate(80px,80px) rotate(0deg);
+            }
+            to {
+                transform: rotate(3600deg) translate(80px,80px) rotate(-3600deg);
+            }
+        }
+        .ds:hover .second {
+		        animation: rotate 30s linear;
+        }
+
+		</style>
+</head>
+<body>
+		<div class="df">
+				<span class="first"></span>
+		</div>
+		<div class="ds">
+				<span class="second"></span>
+		</div>
+
+</body>
+</html>
