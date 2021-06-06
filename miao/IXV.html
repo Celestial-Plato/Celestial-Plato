@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>Title</title>
+		<style>
+        div {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            margin:auto;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            text-align:center;
+            font-size:3em;
+            line-height:100px;
+
+        }
+
+        section:hover {
+            transform: rotatey(180deg)rotatex(180deg)rotatez(180deg);
+        }
+
+
+        div {
+            /* background-color:rgba(255,255,255,0.8) */
+            box-shadow: 0 0 40px #ccc;
+        }
+
+        section {
+            font-family:江西拙楷;
+            width: 200px;
+            height: 200px;
+            position:relative;
+            margin:auto;
+            transition:5s;
+            transform-style:preserve-3d;
+        }
+        div.s1 {
+            transform: rotatex(90deg)  translatez(50px);
+        }
+
+        div.s2 {
+            transform: rotatex(-90deg)  translatez(50px);
+        }
+
+        div.s3 {
+            transform: rotatey(90deg)  translatez(50px);
+        }
+        div.s4 {
+            transform: rotatey(-90deg) translatez(50px);
+        }
+
+        div.s5 {
+            transform: rotatez(0deg) translatez(50px);
+        }
+        div.s6 {
+            transform: rotatez(0deg) translatez(-50px);
+        }
+
+		</style>
+</head>
+<body>
+<section>
+		<div class="s1">I</div>
+		<div class="s2">II</div>
+		<div class="s3">III</div>
+		<div class="s4">IV</div>
+		<div class="s5">V</div>
+		<div class="s6">VI</div>
+</section>
+</body>
+</html>

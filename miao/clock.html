@@ -59,6 +59,95 @@
 				.n12 {
             transform: translate(-50%, -50%)rotate(360deg) translateY(-130px) rotate(-360deg);
 				}
+				.time {
+						width: 15px;
+						margin: auto;
+						position: absolute;
+						bottom: 0;
+						top:0;
+						right: 0;
+						left: 0;
+				}
+				@keyframes move {
+						from {
+								transform: rotate(0deg);
+						}
+						5% {
+								transform: rotate(1deg);
+						}
+						10% {
+								transform: rotate(0deg);
+						}
+						15% {
+								transform: rotate(-0.5deg);
+						}
+						20% {
+								transform: rotate(0deg);
+						}
+						100% {
+								transform: rotate(0deg);
+						}
+
+        }
+				@keyframes spin {
+						to {
+								transform: rotate(360deg) ;
+						}
+        }
+				.second {
+						animation: spin 60s infinite steps(60,end);
+				}
+				.minute {
+						animation: spin 3600s infinite steps(60,end);
+				}
+				.hour {
+						animation: spin  43200s -10000s infinite steps(60,end);
+				}
+
+				.h {
+            animation: move calc(3600 * 60s) ease-out infinite;
+            height: 60px;
+            position: absolute;
+            transform-origin: center bottom;
+            width: 7px;
+            bottom: 50%;
+            left: 0;
+            right: 0;
+            background-color: black;
+            margin: auto;
+            border-top-right-radius: 50% 20%;
+            border-top-left-radius: 50% 20%;
+				}
+				.s {
+						animation: move 1s ease-out infinite;
+						transform-origin: center 102px;
+            height: 120px;
+            position: absolute;
+            width: 3px;
+            bottom: 44%;
+            left: 0;
+            right: 0;
+            background-color: red;
+            margin: auto;
+            border-top-right-radius: 50% 20%;
+            border-top-left-radius: 50% 20%;
+
+				}
+				.m {
+            animation: move 60s ease-out infinite;
+            height: 90px;
+            position: absolute;
+            transform-origin: center bottom;
+            width: 5px;
+            bottom: 50%;
+            left: 0;
+            right: 0;
+            background-color: black;
+            margin: auto;
+            border-top-right-radius: 50% 20%;
+            border-top-left-radius: 50% 20%;
+				}
+
 		</style>
 </head>
 <body>
@@ -76,6 +165,19 @@
 						<div class="n10">X</div>
 						<div class="n11">XI</div>
 						<div class="n12">XII</div>
+				</div>
+						<div class="hour time">
+								<div class="h">
+
+								</div>
+						</div>
+						<div class="minute time">
+								<div class="m">
+
+								</div>
+						</div>
+						<div class="second time">
+								<div class="s"></div>
 				</div>
 		</div>
 </body>
