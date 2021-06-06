@@ -57,10 +57,14 @@
 						 display: inline-block;
 						 width: 120px;
 						 line-height: 40px;
+             /*font-size: 0;*/
 						 margin-left: 15px;
 						 float: right;
              background-color: #4E5558;
 						 text-align: center;
+				 }
+				 .cart a {
+             font-size: 12px;
 				 }
 
 				 .cart::before {
@@ -68,22 +72,38 @@
 						 font-family: "icon-name";
              color: #B4AFA7;
 						 font-size: 20px;
-						vertical-align: -4px;   /*这边有些关于幽灵节点的问题*/
+						 vertical-align: top;
+						/*vertical-align: -4px;   !*这边有些关于幽灵节点的问题*!*/
 				 }
+				 .cart:hover .cart-menu,.cart-menu:hover {
+						 height: 100px;
+				 }
+         .cart-menu {
+            position: absolute;
+		         z-index:100;
+            right: 0;
+            top: 40px;
+            width: 316px;
+            height: 0;
+            color: #424242;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            overflow: hidden;
+            transition: height .3s;
+		         text-align: center;
+		         line-height: 100px;
+        }
+
+
 				 .info a {
 						 padding: 0 5px;
 				 }
 
-				.cart:hover {}
-				 .cart-menu {
-						 width: 316px;
-						 position: absolute;
-						 right: 0;
-						 top: 40px;
-						 height: 0;
-						 background-color: rgb(242, 240, 237);
-             box-shadow: 0 2px 10px rgba(0,0,0,0.2)
-				 }
+				.cart:hover, .cart:hover a,.cart:hover::before {
+						color: #FF6700;
+            background-color: #fff;
+				}
+
 				 .container-I {
 						 width: 1226px;
 						 margin: 0 auto;
@@ -190,8 +210,8 @@
 				.list li:hover {
             background-color: #ff6700;
 				}
-				li {
-						font-size: 14px;
+				.main-list >li {
+						font-size: 16px;
 						list-style: none;
 				}
 				.main-ul {
@@ -730,7 +750,7 @@
           font-size: 15px;
 					display: inline-block;
           margin: 0 0 0 33px;
-          transition: 0s 1000s;
+          transition: 0s 3s;
 					border-bottom: 2px solid transparent;
 			}
 				.tabs {
@@ -751,7 +771,7 @@
 					transition: none;
           border-bottom: 2px solid red;
 					color: red;
-					z-index:10;
+					/*z-index:10;*/
 			}
 
 				.tabs > li section {
@@ -791,6 +811,14 @@
         .promo div:first-child {
             margin-bottom: 14px;
         }
+        .later,.later img {
+            width: 1226px;
+		        height: 594.5px;
+		        margin: auto;
+        }
+        .later {
+		        text-align: center;
+        }
 		</style>
 </head>
 <body>
@@ -811,9 +839,9 @@
 						<span><a href="">智能生活</a></span>
 						<span><a href="">Select Location</a></span>
 						<div class="cart">
-								<a href="">购物车（0）</a>
+								<a href=""> 购物车（0）</a>
 								<div class="cart-menu">
-
+										购物车中还没有商品，赶紧选购吧！
 								</div>
 						</div>
 								<div class="info">
@@ -1340,10 +1368,11 @@
 										<img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/59e8fc8ba9718c266882719fb4bbcedd.jpg?thumb=1&w=1471&h=144&f=webp&q=90" alt="">
 								</a>
 						</div>
-
+						
 				</div>
 
 
 		</div>
+		<div class="later"><img src="later.png" alt=""></div>
 </body>
 </html>
