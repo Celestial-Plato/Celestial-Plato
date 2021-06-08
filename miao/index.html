@@ -43,7 +43,7 @@
 				 .container a:hover {
              color: rgb(242, 240, 237);
 				 }
-				 .container span:after {
+				 .container .menu > span:after {
 						 margin: 0 0.3em;
 						 content: "|";
 						 color: #4E5558;
@@ -819,6 +819,51 @@
         .later {
 		        text-align: center;
         }
+        .app {
+		        position: relative;
+        }
+        .app:hover .appcode {
+		        height: 148px;
+            background-color: #fff;
+		        z-index:100;
+        }
+        .app:hover::before {
+		        visibility: visible;
+        }
+        .appcode {
+		        z-index:100;
+            position: absolute;
+            top: 27px;
+            left: 35%;
+            width: 124px;
+            height: 0;
+            background: #fff;
+            margin-left: -55px;
+            box-shadow: 0 1px 5px #aaa;
+            text-align: center;
+            font-size: 14px;
+            color: #333;
+            line-height: 1;
+            overflow: hidden;
+            transition: height .3s;
+        }
+        .appcode img {
+		        margin: 18px 17px 12px 16px;
+        }
+        .app::before {
+            content: '';
+            position: absolute;
+            z-index: 100;
+            top: 7px;
+            left: 32%;
+            width: 0;
+            height: 0;
+            border-top: transparent solid 10px;
+            border-left: #fff0 solid 10px;
+            border-right: #fff0 solid 10px;
+            border-bottom: #fff solid 10px;
+            visibility: hidden;
+        }
 		</style>
 </head>
 <body>
@@ -835,7 +880,12 @@
 						<span><a href="">企业团购</a></span>
 						<span><a href="">资质证照</a></span>
 						<span><a href="">协议规则</a></span>
-						<span><a href="">下载App</a></span>
+						<span class="app"><a href="">下载App
+								<span class="appcode">
+										<img src="//i1.mifile.cn/f/i/17/appdownload/download.png?1" alt="小米商城" width="90" height="90">
+								小米商城APP
+								</span>
+						</a></span>
 						<span><a href="">智能生活</a></span>
 						<span><a href="">Select Location</a></span>
 						<div class="cart">
