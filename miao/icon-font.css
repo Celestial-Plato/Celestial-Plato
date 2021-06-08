@@ -6,9 +6,27 @@
 [class*=iconfont] {
     font-family: icon-name;
 }
-.iconfont-arrow-left:before{content:"\E626"}
-.iconfont-gift2:before{content:"\E63E"}
-.iconfont-month:before{content:"\E901"}
-.iconfont-simcard2:before{content:"\E906"}
-.iconfont-cart-plus:before{content:"\E60A"}
-.iconfont-arrow-right:before{content:"\E621"}
+
+.iconfont-arrow-left:before {
+    content: "\E626"
+}
+
+.iconfont-gift2:before {
+    content: "\E63E"
+}
+
+.iconfont-month:before {
+    content: "\E901"
+}
+
+.iconfont-simcard2:before {
+    content: "\E906"
+}
+
+.iconfont-cart-plus:before {
+    content: "\E60A"
+}
+
+.iconfont-arrow-right:before {
+    content: "\E621"
+}
