@@ -470,7 +470,79 @@
         console.log(YM)
         console.log(TM)
         console.log(JM+YM+TM)
-		        </script>
+		   </script>
+		<script id="ch0105/08">
+        var n = Number(prompt())
+        var A=(n-2)*180
+        for (i = 1; i < n; i++) {
+           var J=Number(prompt())
+		        A-=J
+        }
+        console.log(A)
+		   </script>
+		<script id="ch0105/09">
+        var n = Number(prompt())
+        var m = Number(prompt())
+        var sum=0
+       for(i=n;i<m+1;i++) {
+           if (i%2!==0) {
+               sum+=i
+           }
+       }
+       console.log(sum)
+		   </script>
+		<script id="ch0105/10">
+        var n = Number(prompt())
+        var m = Number(prompt())
+        var sum=0
+        for(i=n;i<m+1;i++) {
+            if (i%17===0) {
+                sum+=i
+            }
+        }
+        console.log(sum)
+		</script>
+		<script id="ch0105/11">
+        var k = Number(prompt())
+        var one=0,five=0,ten=0
+        for(i=0;i<k;i++) {
+            var x = Number(prompt())
+            if (x===1) {
+                one++
+            }
+        else if (x===5) {
+                five++
+            }
+        else if (x===10) {
+                ten++
+            }
+        }
+        console.log(one)
+        console.log(five)
+        console.log(ten)
+		</script>
+		<script id="ch0105/12">
+				var count=0
+        var N = Number(prompt())
+        var m = Number(prompt())
+        for(i=0;i<N;i++) {
+            var x = Number(prompt())
+            if (x === m) {
+                count++
+            }
+        }
+        console.log(count)
+		</script>
+		<script id="ch0105/13">
+        var a = Number(prompt())
+        var n = Number(prompt())
+        console.log(a**n)
+		</script>
+		<script id="ch0105/14">
+        var x = Number(prompt())
+        var n = Number(prompt())
+        console.log(((1.001**n)*x).toFixed(4))
+		</script>
 </head>
 <body>
 
