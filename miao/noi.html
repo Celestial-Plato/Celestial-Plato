@@ -543,6 +543,56 @@
         var n = Number(prompt())
         console.log(((1.001**n)*x).toFixed(4))
 		</script>
+		<script id="ch0105/15">
+        var R= Number(prompt())
+        var M = Number(prompt())
+        var Y = Number(prompt())
+        console.log(Math.trunc(((R/100+1)**Y)*M))
+		</script>
+		<script id="ch0105/16">
+        var N= Number(prompt())
+         var K = Number(prompt())
+       var x=1
+       while (( N*x <(200*((1+(K/100))**(x-1))) ) && x<50) {
+           x++;
+       }
+       if(x<=20)
+        console.log(x)
+        else console.log("Impossible")
+		</script>
+		<script id="ch0105/17">
+        var k = Number(prompt())
+        var n=1
+        var t=2
+        var x1=1,x2=1
+        while(n<k) {
+            n++
+            x1=x2
+		        x2=t
+		        t=x1+x2
+        }
+        console.log(x1)
+		</script>
+		<script id="ch0105/18">
+        var n =Number(prompt())
+        var SJ =Number(prompt())
+        var EJ =Number(prompt())
+        var x=SJ/EJ
+        for( var i=1;i<n;i++) {
+            var S =Number(prompt())
+            var E =Number(prompt())
+		        y=S/E
+            console.log(x-y)
+		        if (x-y>0.05)  console.log("better")
+		        else if (y-x>0.05)  console.log("worse")
+		        else console.log("same")
+        }
+		</script>
+
+
+
+
+
 </head>
 <body>
 
