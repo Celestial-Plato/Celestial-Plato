@@ -582,12 +582,52 @@
             var S =Number(prompt())
             var E =Number(prompt())
 		        y=S/E
-            console.log(x-y)
 		        if (x-y>0.05)  console.log("better")
 		        else if (y-x>0.05)  console.log("worse")
 		        else console.log("same")
         }
 		</script>
+		<script id="ch0105/19">
+        var n =Number(prompt())
+        var t=0
+        for( var i=0;i<n;i++) {
+            var x=Number(prompt())
+            var y =Number(prompt())
+            var number =Number(prompt())
+		        t+=number*1.5+(Math.sqrt(x*x+y*y)/25)
+        }
+        console.log(Math.ceil(t))
+		</script>
+		<script id="ch0105/20">
+        var h =Number(prompt())
+        var x=h,s=0
+        for( var j=0;j<9;j++) {
+            x=x/2
+		        s+=x*2
+        }
+        console.log((s+20).toFixed(4))
+        console.log((x/2).toFixed(7))
+
+		</script>
+		<script id="ch0105/21">
+        var N =Number(prompt())
+        if (N===1)
+            console.log("End")
+        else if(N!==1) {
+		        while(N!==1) {
+            if (N%2===0) {
+                console.log(`${N}/2=${N/2}`)
+                N=N/2
+            }
+				        else if (N%2!==0) {
+                console.log(`${N}*3+1=${N * 3 + 1}`)
+                N = N * 3 + 1
+            }
+        }
+            console.log("End")
+        }
+		</script>
+		
 
 
 
