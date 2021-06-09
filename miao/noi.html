@@ -293,7 +293,7 @@
 		var z = Number(prompt())
 		var t
 		if (x < z ) t=z
-		if (x < y)  t=y
+		if (x < y && z<y)  t=y
 		console.log(t)
 		</script>
 		<script id="ch0104/16" >
@@ -356,7 +356,7 @@
       }
 			else if (delta<0)
 			{
-          console.log("x1=%s+%si;x2=%s-%si",x.toFixed(5),y.toFixed(5),x.toFixed(5),y.toFixed(5))
+          console.log("x1="+x.toFixed(5)+"+"+y.toFixed(5)+"i;x2="+y.toFixed(5)+"-"+y.toFixed(5)+"i")
 			}
 
 		</script>
