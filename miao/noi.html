@@ -744,6 +744,84 @@
         }
         else console.log("NO")
 		</script>
+		<script id="ch0105/31">
+        var N=Number(prompt(""))
+        var M=Number(prompt(""))
+        var a=[1]
+        for (var k=0;k++;k<N) {
+            a[k]="1"
+        }
+        for(var i = 1;i++;i<=M) {
+            for (var j = 1; j++; j <= N) {
+                if (j % i === 0) {
+                    a[j - 1] = -a[j - 1]
+                }
+            }
+        }
+        for ( k=0;k++;k<N) {
+            if(a[k]<0) {
+                console.log("k")
+            }
+        }
+      </script>
+		<script id="ch0105/32">
+				var p=1,q=2,t,a,s=0
+        var n=Number(prompt(""))
+        for(var i=1;i<=n;i++) {
+            a=q/p
+		        s+=a
+            t=q
+		        q=q+p
+		        p=t
+        }
+        console.log(s.toFixed(4))
+		</script>
+		<script id="ch0105/33">
+				var t=1,s=0
+        var n=Number(prompt(""))
+        for(var i=1;i<=n;i++) {
+           s+=1/i*t
+		        t=-t
+        }
+        console.log(s.toFixed(4))
+		        </script>
+		<script id="ch0105/34">
+				var s=0,t=1
+        var n=Number(prompt(""))
+        for(var i=1;i<=n;i++) {
+            for(var j=1;j<=i;j++) {
+                t*=j
+            }
+            s+=t
+		        t=1
+        }
+        console.log(s)
+		        </script>
+		<script id="ch0105/35">
+        var s=0,t=1
+        var n=Number(prompt(""))
+        for(var i=1;i<=n;i++) {
+            for(var j=1;j<=i;j++) {
+                t*=j
+            }
+            s+=1/t
+            t=1
+        }
+        console.log((s+1).toFixed(10))
+		</script>
+		<script id="ch0105/36">
+        var s=0,t=1
+        var x=Number(prompt(""))
+        var n=Number(prompt(""))
+        for(var i=1;i<=n;i++) {
+            for(var j=1;j<=i;j++) {
+                t*=x
+            }
+            s+=t
+            t=1
+        }
+        console.log((s+1).toFixed(2))
+		</script>
 </head>
 <body>
 
