@@ -682,7 +682,7 @@
                 }
             }
 				}
-         console.log("(不提供)")
+         console.log(" (不提供) ")
 		</script>
 		<script id="ch0105/26">
         var n=Number(prompt(""))
@@ -747,20 +747,20 @@
 		<script id="ch0105/31">
         var N=Number(prompt(""))
         var M=Number(prompt(""))
-        var a=[1]
-        for (var k=0;k++;k<N) {
-            a[k]="1"
+        var a=[]
+        for (var k=0;k<N;k++) {//数组，1表示灯开
+            a.push(1)
         }
-        for(var i = 1;i++;i<=M) {
-            for (var j = 1; j++; j <= N) {
+        for(var i = 1;i<=M;i++) {//人
+            for (var j = 1; j <= N; j++) {//灯
                 if (j % i === 0) {
                     a[j - 1] = -a[j - 1]
                 }
             }
         }
-        for ( k=0;k++;k<N) {
+        for ( k=0;k<N;k++) {
             if(a[k]<0) {
-                console.log("k")
+                console.log(k+1)
             }
         }
       </script>
