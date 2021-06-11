@@ -829,9 +829,15 @@
 		<script id="ch0105/37">
 				</script>
 		<script id="ch0105/38">
+				debugger
+				var B=Number(prompt(""))
+				for (j=0;j<B;j++) {
         var n=Number(prompt(""))
         var t=n
-					if(n===0) console.log(0)
+					if(n===0)
+					{   var y = Number(prompt(""))
+              console.log(0)
+          }
         else {
               for (var i = 0; i <= n; i++) {
                   var x = Number(prompt(""))
@@ -842,6 +848,7 @@
                   t--
               }
           }
+        }
 		</script>
 		<script id="ch0105/39">
         debugger
@@ -916,7 +923,7 @@
                 }
 		        }
                 }
-            s+=t
+            s+=t+" "
 		        console.log(s)
         }
 		</script>
