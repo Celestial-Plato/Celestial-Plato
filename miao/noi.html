@@ -827,7 +827,25 @@
         console.log((s+1).toFixed(2))
 		</script>
 		<script id="ch0105/37">
-				</script>
+        var M=Number(prompt(""))
+        var N=Number(prompt(""))
+        var X=Number(prompt(""))
+        var VIT=0 //当前体力值
+        while (X>0) {
+            while( VIT!==M) {
+                X--
+                VIT += N
+                if (VIT >= M) {
+                    VIT = M
+                }
+            }
+					 //战斗力更新
+		        N+=Math.floor(M/N)
+		            VIT=0
+
+        }
+        console.log(N)
+		</script>
 		<script id="ch0105/38">
 				debugger
 				var B=Number(prompt(""))
@@ -896,7 +914,7 @@
 		</script>
 
 		<script id="ch0105/42">
-        console.log("@@@@@@@\n@                @\n@                @\n@                @\n@                @\n@                @\n@@@@@@@ ")
+        console.log("@@@@@@@\n@            @\n@            @\n@                @\n@                @\n@                @\n@@@@@@@ ")
         // var h=Number(prompt(""))
         // var w=Number(prompt(""))
         // var z=prompt("")
