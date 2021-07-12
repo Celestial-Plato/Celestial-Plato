@@ -15,6 +15,7 @@ var celestial_plato = function () {
         return result
     }
 
+
     function compact(array) {
         return array.filter(i => !!i === true);
     }
@@ -56,8 +57,20 @@ var celestial_plato = function () {
         if (typeof it === "string") {
             return val => val[it];
         }
-        if(typeof it=== "function") {
+        if(typeof it === "function") {
             return it;
+        }
+        if(Array.isArray(it)) {
+            return obj => obj[it[0]] === it[1]
+        }
+        if(typeof it === "object") {
+            return function(obj) {
+                for(let key in it) {
+                    if(obj[key] !== it[key])
+                        return false;
+                }
+                return true;
+            }
         }
     }
 
@@ -99,6 +112,43 @@ var celestial_plato = function () {
         return arr;
     }
 
+    function forEach(array, f) {
+        for(let key in array) {
+            f(array[key],key);
+        }
+    }
+
+    function every(arr, f) {
+        for(let key in arr) {
+            if(!f(arr[key])) return false;
+        }
+        return true;
+    }
+
+    function map(arr, f) {
+        var it = iterator(f), result = [];
+        for(let val of arr) {
+            result.push(it(val))
+        }
+        return result;
+    }
+
+    function filter(arr, f) {
+        var it = iterator(f), result =[];
+        for(let key in arr) {
+            if(it(arr[key])) {
+                result.push(arr[key]);
+            }
+        }
+        return result;
+    }
+
+    function findIndex(arr, val, num) {
+        for(let i = num; i < arr.length; i++) {
+            if(arr[i] === val) return i;
+        }
+        return -1;
+    }
 
     return {
         chunk: chunk,
@@ -109,6 +159,8 @@ var celestial_plato = function () {
         uniq: uniq,
         uniqBy: uniqBy,
         zip: zip,
-        unzip: unzip
+        unzip: unzip,
+        filter: filter,
+        findIndex: findIndex
     }
 }();
