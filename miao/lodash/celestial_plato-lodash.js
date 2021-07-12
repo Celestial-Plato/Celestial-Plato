@@ -74,6 +74,27 @@ var celestial_plato = function () {
         }
     }
 
+    function iterate(it) {
+        if (typeof it === "string") {
+            return val => val[it];
+        }
+        if(typeof it === "function") {
+            return it;
+        }
+        if(Array.isArray(it)) {
+            return obj => obj[it[0]] === it[1]
+        }
+        if(typeof it === "object") {
+            return function(obj) {
+                for(let key in it) {
+                    if(obj[key] !== it[key])
+                        return false;
+                }
+                return true;
+            }
+        }
+    }
+
     function zip(...args) {
         var result = [], arr= [].concat(...args), a = [], b = [];
         for(var i = 0; i < arr.length; i++) {
@@ -114,13 +135,17 @@ var celestial_plato = function () {
 
     function forEach(array, f) {
         for(let key in array) {
-            f(array[key],key);
+            if(f(array[key],key) === false)
+            break;
         }
+        return array;
     }
 
+
     function every(arr, f) {
+        var it = iterator(f)
         for(let key in arr) {
-            if(!f(arr[key])) return false;
+            if(!it(arr[key])) return false;
         }
         return true;
     }
