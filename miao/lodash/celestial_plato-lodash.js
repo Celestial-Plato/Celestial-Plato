@@ -50,11 +50,12 @@ var celestial_plato = function () {
         for(var i = start; i < end; i++) {
             a[i] = str;
         }
-        return str;
+        return a;
     }
 
     function iterator(it) {
         if (typeof it === "string") {
+            if(it === 'length') return val => val.length;
             return val => val[it];
         }
         if(typeof it === "function") {
@@ -213,6 +214,45 @@ var celestial_plato = function () {
         }
         return result;
     }
+    function keyBy(obj, f) {
+        var it = iterator(f);
+        var result = {};
+        for(let val of obj) {
+            result[it(val)] = val;
+        }
+        return result;
+    }
+    function reverse(arr) {
+        var n = arr.length;
+        for(var i = 0; i< n / i; i++) {
+            [arr[i], arr[n - i - 1]] = [arr[n - i - 1], arr[i]];
+        }
+        return arr;
+    }
+
+    function slice(arr, start = 0, end = arr.length) {
+        var result = [];
+        for(var i = start; i < end; i++) {
+            result.push(arr[i])
+        }
+        return result;
+    }
+
+    function countBy(col, f) {
+        var it = iterator(f), map = {};
+        for(let key in col) {
+            map[it(col[key])] === undefined ? map[it(col[key])] = 1 :  map[it(col[key])]++;
+        }
+        return map;
+    }
+
+    function groupBy(col, f) {
+        var it = iterator(f), map = {};
+        for(let key in col) {
+            map[it(col[key])] === undefined ? map[it(col[key])] = [col[key]] :  map[it(col[key])].push(col[key])
+        }
+        return map;
+    }
 
     return {
         chunk: chunk,
@@ -233,7 +273,12 @@ var celestial_plato = function () {
         some: some,
         reduce: reduce,
         keys: keys,
-        values: values
+        values: values,
+        keyBy: keyBy,
+        reverse: reverse,
+        slice: slice,
+        groupBy: groupBy,
+        countBy: countBy
 
     }
 }();
