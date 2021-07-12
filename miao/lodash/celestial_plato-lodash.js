@@ -143,11 +143,50 @@ var celestial_plato = function () {
         return result;
     }
 
-    function findIndex(arr, val, num) {
+    function findIndex(arr, f, num = 0) {
+        var it = iterator(f)
         for(let i = num; i < arr.length; i++) {
-            if(arr[i] === val) return i;
+            if(it(arr[i])) return i;
         }
         return -1;
+    }
+
+    function reduce(col, f, initial) {
+        var arr = Object.keys(col);//将对象的key放到一个数组中;
+        var start = 0;//第一个key;
+        if (arguments.length === 2) {
+            initial = col[arr[0]]
+            start = 1
+        }
+        for (var i = start; i < arr.length; i++) {
+            initial = f(initial, col[arr[i]], arr[i], col)
+        }
+        return initial;
+    }
+
+    function some(col, f) {
+        var it = iterator(f)
+        for(let key in col) {
+            if(it(col[key])) return true;
+        }
+        return false;
+    }
+    function keys(obj) {
+        var result = []
+        for(let key in obj) {
+            if(obj.hasOwnProperty(key))
+                result.push(key);
+        }
+        return result;
+    }
+
+    function values(obj) {
+        var result = []
+        for(let key in obj) {
+            if(obj.hasOwnProperty(key))
+                result.push(obj[key]);
+        }
+        return result;
     }
 
     return {
@@ -161,6 +200,15 @@ var celestial_plato = function () {
         zip: zip,
         unzip: unzip,
         filter: filter,
-        findIndex: findIndex
+        findIndex: findIndex,
+        map: map,
+        every: every,
+        forEach: forEach,
+        fill: fill,
+        some: some,
+        reduce: reduce,
+        keys: keys,
+        values: values
+
     }
 }();
