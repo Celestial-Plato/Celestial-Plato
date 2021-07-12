@@ -11,7 +11,7 @@ var celestial_plato = function () {
                 arr = [];
             }
         }
-        result.push(arr);
+        if(count !== 0) result.push(arr);
         return result
     }
 
@@ -20,18 +20,37 @@ var celestial_plato = function () {
     }
 
     function difference(a,...arg) {
-        var arr = concat(...arg)
+        var arr = [].concat(...arg)
         for(var i=0; i<a.length; i++) {
             if (!arr.includes(a[i])) {
                 result.push(a[i]);
             }
         }
         return result;
-
     }
+
+    function drop(a, n = 1) {
+        var result = [];
+        for(var i = n; i < a.length; i++) {
+            result.push(a[i]);
+        }
+        return result;
+    }
+
+    function dropRight(a, n = 1) {
+        var result = [];
+        for(var i = 0; i < a.length - n; i++) {
+            result.push(a[i]);
+        }
+        return result;
+    }
+
+
     return {
         chunk: chunk,
         compact: compact,
-        difference: difference
+        difference: difference,
+        drop: drop,
+        dropRight: dropRight
     }
 }();
