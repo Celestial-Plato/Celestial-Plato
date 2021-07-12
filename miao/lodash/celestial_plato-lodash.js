@@ -20,7 +20,7 @@ var celestial_plato = function () {
     }
 
     function difference(a,...arg) {
-        var arr = [].concat(...arg)
+        var arr = [].concat(...arg), result = [];
         for(var i=0; i<a.length; i++) {
             if (!arr.includes(a[i])) {
                 result.push(a[i]);
