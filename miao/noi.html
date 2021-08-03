@@ -3,6 +3,114 @@
 <head>
 		<meta charset="UTF-8">
 		<title>noi</title>
+
+		<script id="function" >
+				function isNarcis(m) {
+				    let n=m
+				    let digit
+						let sum=0
+				    while(n) {
+				        digit=n%10
+						    sum+=digit**3
+						    n=(n-digit)/10
+				    }
+				    return sum === m;
+				}
+
+				function isPalin(m) {
+            let n=m
+            let digit
+            let sum=""
+            while(n) {
+                digit=n%10
+                sum+=digit
+                n=(n-digit)/10
+		           // console.log(digit)
+            }
+            return sum == m;
+        }
+        isPalin(1221)
+				function isComplete(m) {
+				    let sum=1
+						for (let i=2;i<Math.sqrt(m);i++) {
+						    if (m%i===0) {
+						        sum+=i+m/i
+						    }
+						    //console.log(sum)
+						}
+            return sum === m;
+				}
+				isComplete(8128)
+				function isPrime(m) {
+				    let count=0
+						for (let i=2;i<Math.sqrt(m);i++) {
+						    if (m%i===0) {
+						        count++
+						    }
+						    //console.log(sum)
+						}
+						return count === 0;
+				}
+				isPrime(17)
+				function gcd(m,n) {
+				    let p=m,q=n
+						let r
+						while(!r) {
+				        r=p%q
+				        p=q
+								q=r
+						}
+						console.log(q,m*n/q)
+				}
+				function sqrt(y) {
+				    let l=0
+						let h=y
+				    let x=y/2
+				    while(Math.abs(x*x-y)>1e-9) {
+				        if (x*x>y) h=x
+						    else l=x
+                x=(l+h)/2
+				    }
+				    console.log(x.toFixed(9))
+				}
+				function weekday(y,m) {
+				    let sum=0
+						let weekday
+				    weekday=(365*(y-1)+Math.floor((y-1)/4)-Math.floor((y-1)/100)+Math.floor((y-1)/400))
+						for(i=1;i<m;i++) {
+                switch (i) {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        sum += 31
+                        break
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        sum += 30
+                        break
+                    case 2:
+                        if (y % 400 === 0 || y % 4 === 0 && y % 100 !== 0) {
+                            sum += 29;
+                        } else
+                            sum += 28;
+                        break;
+                    default:
+                        return "error"
+                }
+            }
+            return (sum+weekday+1)%7
+				}
+
+
+
+		</script>
+
 		<script id="ch0103/01" type="noi">
 				var a = Number(prompt())
 				var b = Number(prompt())

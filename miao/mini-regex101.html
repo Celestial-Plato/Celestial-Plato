@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <style>
+            input[type = "text"] {
+                width: 392px;
+            }
+            em {
+                font-style: normal;
+                /* 将斜体改为正体 */
+                background-color:  rgb(218, 222, 247);
+            }
+            section {
+                position: relative;
+                width: 400px;
+                /*oveflow: hidden; */
+            }
+            section textarea {
+                position: relative;/*为了使用z-index;*/
+                z-index: 10;
+                background-color: transparent;/*避免遮盖pre标签的颜色*/
+            }
+            section textarea, section pre {
+
+                white-space: pre-wrap;
+                word-break: break-all;
+                height: 100%;
+                box-sizing: border-box;
+                /* 貌似textarea默认表现为border-box, 虽然内部显示为content-box,合理怀疑Input也是 */
+                /*pre和textarea的boxsizing不一样*/
+                padding: 5px;
+                width: 100%;
+                border: 1px solid black;
+                display: block;
+                margin: 0;
+                overflow-y:  scroll;
+                /*滚动生效，setScroll生效*/
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+            label input {
+                /*border-radius: 5px;*/
+                cursor: pointer;
+            }
+            section pre {
+                color: transparent;
+                /*排除缩放干扰*/
+                position: absolute;
+                top: 0;
+            }
+            em:empty {
+                border-right: 1px solid greenyellow;
+                margin-right: -1px;
+                background-color: transparent;
+            }
+            em:nth-of-type(even) {
+                background-color: #d5ebff;
+            }
+            p#infoError {
+                color: red;
+                height: 1em;
+            }
+
+        </style>
+
+</head>
+<body>
+    <div>
+        请输入正则表达式：
+        <label><input type="checkbox" onclick="run()" id="ignoreCase">i</label>
+        <label><input type="checkbox" checked onclick="run()" id="global">g</label>
+        <label><input type="checkbox" onclick="run()" id="multiline">m</label>
+        <label><input type="checkbox" onclick="run()" id="sticky">y</label>
+        <label><input type="checkbox" checked onclick="run()" id="singleLine">s</label>
+        <label><input type="checkbox" onclick="run()" id="unicode">u</label>
+        <br>
+        <input type="text" id = "regex" value = '(?=f)' oninput = "run()">
+        <p id = "infoError"></p>
+        请输入内容：
+        <br>
+        <section>
+            <pre id = "result">
+
+            </pre>
+            <textarea  id="strInput" onscroll = "setScroll()" spellcheck = "false" cols="30" rows="10" oninput = "run()">foofooofoafobfoc</textarea>
+        </section>
+    </div>
+    <script>
+        //let outputError
+        
+        
+
+        function setScroll() {
+            let scrollTop = strInput.scrollTop;
+            result.scrollTop = scrollTop;
+        }
+        
+        function run() {
+            let flag = getFlags()
+            let regVal = regex.value;
+
+            try {
+                var reg = new RegExp(regVal, flag);
+                infoError.innerHTML = ''
+                //这里不能用let
+            } catch(e) {
+                console.log(e);
+                infoError.innerHTML = e.message;
+                result.innerHTML = ''
+                return;  //有错误不执行接下来的
+            }
+
+            var match;
+            var resultHTML = '';
+            var str = strInput.value;
+
+            console.log(str);
+
+            var lastIndex = reg.lastIndex;
+
+            if(reg.global) {
+                while(match = reg.exec(str)) {
+                    resultHTML += str.slice(lastIndex, match.index);
+                    resultHTML += '<em>' + match[0] + '</em>';
+                    lastIndex = reg.lastIndex;
+                    //零宽匹配
+                    if(match[0] == '') {
+                        reg.lastIndex++;
+                    }
+                }
+                resultHTML += str.slice(lastIndex)
+                //这行代码在while外面
+                result.innerHTML = resultHTML + "\n";
+            } else {
+                match = reg.exec(str);
+                resultHTML += str.slice(lastIndex, match.index);//原为str.slice(lastIndex, match.index)
+                resultHTML += '<em>' + match[0] + '</em>';
+                //lastIndex = reg.lastIndex; //不需要
+                resultHTML += str.slice(match[0].length + match.index) ;//lastIndex需要g才能生效，非常重要
+                result.innerHTML = resultHTML + "\n";
+            }
+            
+            console.log(result.innerHTMl);
+        }
+
+        run()
+
+        function getFlags() {
+            let flags = '';
+            if (ignoreCase.checked) {
+                flags += 'i'
+            }
+            if (global.checked) {
+                flags += 'g'
+            }
+            if (multiline.checked) {
+                flags += 'm'
+            }
+            if (singleLine.checked) {
+                flags += 's'
+            }
+            if (sticky.checked) {
+                flags += 'y'
+            }
+            if (unicode.checked) {
+                flags += 'u'
+            }
+            return flags;
+        }
+    </script>
+</body>
+</html>

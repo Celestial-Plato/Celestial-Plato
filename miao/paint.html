@@ -80,9 +80,11 @@
 for(var m=0;m<50;m++) {
   dot(m,m+50)
 }
+//由于斜率>1,所以画出来的店
   for(var n=0;n<50;n=n+1) {
     dot(n,Math.sqrt(3)*n)
   }
+
   for(var p=0;p<500;p=p+1) {
     dot(p,p)
   }
@@ -99,21 +101,30 @@ for(var m=0;m<50;m++) {
   }
 
   //实心矩形
-  for(var q=220;q<=280;q=q+1) {
-    for(var r=420;r<=480;r=r+1) {
-      dot(q,r,color="lightblue")
-    }
-  }
+
   //圆
-  for(var t=0;t<=6.283;t=t+0.001) {
-    var xc=Math.cos(t)*50
-    var yc=Math.sin(t)*50
-    dot(xc+250,yc+250)
-  }
-  for(var ti=0;ti<=6.283;ti=ti+0.001) {
-    var xci=Math.cos(ti)*250
-    var yci=Math.sin(ti)*250
-    dot(xci+250,yci+250)
+  var x = 0
+  var y = 240
+  var rs = y * y // 半径的平方
+  while (y >= x) {
+    dot(x + 250, y + 250)
+    dot(-x + 250, y + 250)
+    dot(x + 250, -y + 250)
+    dot(-x + 250, -y + 250)
+    dot(y + 250, x + 250)
+    dot(-y + 250, x + 250)
+    dot(y + 250, -x + 250)
+    dot(-y + 250, -x + 250)
+    x++
+    var y1 = y
+    var y2 = y - 1
+    var d1 = x * x + y1 * y1
+    var d2 = x * x + y2 * y2
+    if (Math.abs(d1 - rs) < Math.abs(d2 - rs)) {
+      y = y1
+    } else {
+      y = y2
+    }
   }
   //实心圆
   for (r=1;r<=30;r++)
@@ -123,30 +134,33 @@ for(var m=0;m<50;m++) {
     dot(xct+250,yct+250)
   }
   //rgb色彩空间
-  for(var qi=100;qi<=200;qi=qi+1) {
-    for(var ri=100;ri<=200;ri=ri+1) {
-      dot(qi,ri,color='rgb(40,'+(qi-50)+','+ri+')')
+  for(let x=0;x<=100;x=x+1) {
+    for(let y=0;y<=100;y=y+1) {
+      dot(x+100,y+200,color='rgb(255,'+x*2.55+','+y*2.55+')')
     }
   }
-  for(var ql=100;ql<=200;ql=ql+1) {
-    for(var rl=100;rl<=200;rl=rl+1) {
-      dot(ql*2,rl*2,color='rgb(40,'+(ql-50)+','+rl+')')
+  //放大
+  for(let x=0;x<=100;x=x+1) {
+    for(let y=0;y<=100;y=y+1) {
+      dot(x*2+200,y*2+400,color='rgb(255,'+x*2.55+','+y*2.55+')')
     }
 
   }
-  for(var qlt=100;qlt<=200;qlt=qlt+0.5) {
-    for(var rlt=100;rlt<=200;rlt=rlt+0.5) {
-      dot(qlt*0.5+0.27*rlt,rlt+150,color='rgb(40,'+(qlt*0.5+0.27*rlt)+','+(rlt)+')')
+  //倾斜
+  for(let x=0;x<=100;x=x+0.5) {
+    for(let y=0;y<=100;y=y+0.5) {
+      dot(x+0.27*y+100,y+100,color='rgb(255,'+x*2.55+','+y*2.55+')')
     }
   }
-  for(var qt=100;qt<=200;qt=qt+0.3) {
-    for(var rt=100;rt<=200;rt=rt+0.3) {
-      dot(qt*0.5+0.87*rt+200,rt*0.5-0.87*qt+250,color='rgb(240,'+(qt*0.5+0.87*rt)+','+(rt*0.5-0.87*qt)+')')
+  //旋转
+  for(let x=0;x<=100;x=x+0.3) {
+    for(let y=0;y<=100;y=y+0.3) {
+      dot(x*0.5+0.87*y+200,y*0.5-0.87*x+150,color='rgb(255,'+x*2.55+','+y*2.55+')')
     }
   }
   //正弦曲线
-for (si=0;si<=628;si=si+0.1) {
-  dot(si,10*Math.sin(si/6.28)+250)
+for (let x=0;x<=Math.PI*100;x=x+0.1) {
+  dot(x,10*Math.sin(x/Math.PI/2)+250)
 }
 </script>
 </html>
