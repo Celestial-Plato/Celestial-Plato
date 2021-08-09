@@ -228,7 +228,7 @@ var celestial_plato = function () {
 
     function findLastIndex(arr, f, num = arr.length - 1) {
         for(let i = num; i >= 0; i--) {
-            if(it(arr[i])) return i;
+            if(iterator(arr[i])) return i;
         }
         return -1;
     }
@@ -257,7 +257,7 @@ var celestial_plato = function () {
             if(!Array.isArray(arr[i])) {
                 result.push(arr[i]);
             } else {
-                let help = flatten(arr[i]);
+                let help = flattenDeep(arr[i]);
                 for( let j = 0; j < help.length; j++) {
                     result.push(help[j]);//常见错误，push[]
                 }
@@ -349,7 +349,7 @@ var celestial_plato = function () {
         return -1;
     }
     function nth(arr, n = 0) {
-        if(n < 0); n = arr.length -1 + n;
+        if(n < 0) n = arr.length -1 + n;
         return arr[n];
     }
 
@@ -500,8 +500,11 @@ var celestial_plato = function () {
         findLastIndex: findLastIndex,
         isEqual: isEqual,
         toPath: toPath,
+        initial: initial,
         chunk: chunk,
         compact: compact,
+        differenceBy: differenceBy,
+        differenceWith: differenceWith,
         difference: difference,
         drop: drop,
         dropRight: dropRight,
