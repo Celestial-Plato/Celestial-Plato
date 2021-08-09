@@ -20,11 +20,43 @@ var celestial_plato = function () {
         return array.filter(i => !!i === true);
     }
 
-    function difference(a,...arg) {
+    function difference(a, ...arg) {
         var arr = [].concat(...arg), result = [];
         for(var i=0; i<a.length; i++) {
             if (!arr.includes(a[i])) {
                 result.push(a[i]);
+            }
+        }
+        return result;
+    }
+
+    function differenceBy(a, ...arg) {
+
+        if(Array.isArray(arg[arg.length - 1])) {
+            return difference(a, ...arg)
+        }
+        var f = arg.pop();
+        var array = arg.reduce((pre, cur) => pre.concat(cur))//展平
+        var g = iterator(f), result = [];
+        var arr = array.map(it => g(it));
+        for(var i=0; i<a.length; i++) {
+            if (!a.includes(arr[i])) {
+                result.push(a[i]);
+            }
+        }
+        return result;
+    }
+    function differenceWith(arr, comp, f) {
+        var flag, result = [];
+        for(let val of arr) {
+            flag = true;
+            for(let cp of comp)
+                if(f(val, cp)) {
+                    flag = false;
+                    break;
+                }
+            if(flag = true) {
+                result.push(val);
             }
         }
         return result;
@@ -37,6 +69,13 @@ var celestial_plato = function () {
         }
         return result;
     }
+    function dropRightWhile(a, f) {
+        var g = iterator(f);
+        for(var i = a.length - 1; i >= 0; i--) {
+            if(g(a[i])) a.pop();
+        }
+        return a;
+    }
 
     function dropRight(a, n = 1) {
         var result = [];
@@ -45,6 +84,15 @@ var celestial_plato = function () {
         }
         return result;
     }
+    function dropWhile(a, f) {
+        var arr = a.slice();
+        var g = iterator(f);
+        for(let i = 0; i < a.length; i++) {
+            if(g(a[i])) arr.shift();
+        }
+        return arr;
+    }
+
 
     function fill(a, str, start = 0, end = a.length) {
         for(var i = start; i < end; i++) {
@@ -177,6 +225,162 @@ var celestial_plato = function () {
         return -1;
     }
 
+
+    function findLastIndex(arr, f, num = arr.length - 1) {
+        for(let i = num; i >= 0; i--) {
+            if(it(arr[i])) return i;
+        }
+        return -1;
+    }
+
+    function flatten(arr, deepth = 1) {
+        let result = [];
+        if(deepth === 0 ) return arr;
+        for(let i = 0; i < arr.length; i++) {
+            if(!Array.isArray(arr[i])) {
+                result.push(arr[i]);
+            } else {
+                let help = flatten(arr[i], deepth -1);
+                for( let j = 0; j < help.length; j++) {
+                    result.push(help[j]);//常见错误，push[]
+                }
+
+            }
+        }
+        return result;
+    }
+
+    function flattenDeep(arr) {
+        let result = [];
+
+        for(let i = 0; i < arr.length; i++) {
+            if(!Array.isArray(arr[i])) {
+                result.push(arr[i]);
+            } else {
+                let help = flatten(arr[i]);
+                for( let j = 0; j < help.length; j++) {
+                    result.push(help[j]);//常见错误，push[]
+                }
+
+            }
+        }
+        return result;
+    }
+
+    function flattenDepth(arr, deepth) {
+        let result = [];
+        if(deepth === 0 ) return arr;
+        for(let i = 0; i < arr.length; i++) {
+            if(!Array.isArray(arr[i])) {
+                result.push(arr[i]);
+            } else {
+                let help = flatten(arr[i], deepth -1);
+                for( let j = 0; j < help.length; j++) {
+                    result.push(help[j]);//常见错误，push[]
+                }
+
+            }
+        }
+        return result;
+    }
+
+    function fromPairs(arr) {
+        let map = {};
+        for(let i = 0; i < arr.length; i++) {
+            map[arr[i][0]] = arr[i][1];
+        }
+        return map;
+    }
+
+    function head(arr) {
+        return arr[0];
+    }
+
+    function indexOf(arr, val, fromIndex = 0) {
+        if(fromIndex < 0) fromIndex = Math.max(arr.length - 1 + fromIndex, 0);
+        for(let i = fromIndex; i < arr.length; i++) {
+            if(arr[i] === val) return i;
+        }
+    }
+
+    function initial(arr) {
+        arr.pop();
+        return arr;
+    }
+
+    function intersection(a, ...ary) {
+        for(let i = 0; i < ary.length; i++) {
+            a = a.filter(val => ary[i].includes(val))//一次将a与每一个数组比较，不断更新
+        }
+        return a;
+    }
+
+    function intersectionBy(a, ...ary) {
+        var f = ary.pop();
+        var g = iterator(f);
+        for(let i = 0; i < ary.length; i++) {
+            a = a.filter(val => ary[i].map(it => g(it)).includes(g(val)))
+        }
+        return a;
+    }
+
+    function intersectionWith(a, ...ary) {
+        var f = ary.pop();
+        for(let i = 0; i < ary.length; i++) {
+            a = a.filter(val => ary[i].some(it => f(val, it)));
+        }
+        return a;
+    }
+
+    function join(arr, sep) {
+        var str;
+        str = arr.reduce((pre,cur) => pre + cur + sep,'' );
+        return str.slice(0, str.length -1);
+    }
+
+    function last(arr) {
+        return arr.pop();
+    }
+
+    function lastIndexOf(arr, val, fromIndex = arr.length -1) {
+        for(let i = fromIndex; i >= 0; i--) {
+            if(arr[i] === val) return i;
+        }
+        return -1;
+    }
+    function nth(arr, n = 0) {
+        if(n < 0); n = arr.length -1 + n;
+        return arr[n];
+    }
+
+    function pull(arr, ...remove) {
+        return arr.filter(val => !remove.includes(val));
+    }
+
+    function pullAll(arr, remove) {
+        return arr.filter(val => !remove.includes(val));
+    }
+
+    function pullAllBy(a, remove, f) {
+        var g = iterator(f)
+        return  a.filter(val => !remove.map(it => g(it)).includes(g(val)));
+    }
+
+    function pullAllWith(a, remove, f) {
+        return a.filter(val => !remove.some(it => f(val, it)));
+    }
+
+    function pullAt(arr, ...remove) {
+        return  arr.filter((val, idx) => !remove.includes(idx))
+    }
+
+    function remove(arr, f) {
+        var array = arr.slice();
+        arr = arr.filter(val => !f(val))
+        return array.filter(val => f(val))
+    }
+
+
     function reduce(col, f, initial) {
         var arr = Object.keys(col);//将对象的key放到一个数组中;
         var start = 0;//第一个key;
@@ -254,12 +458,55 @@ var celestial_plato = function () {
         return map;
     }
 
+    function toPath(str) {
+        return str.replace(/\[|\]\./g,'.').split('.')
+    }
+    function isEqual(a, b) {
+        let typea = typeof a;
+        let typeb = typeof b;
+        if(typea !== typeb) {//类型不相同
+            return false;
+        } else {//类型相同，判断是不是数组
+            if(typea ==  "object") {
+                if (Array.isArray(a) + Array.isArray(b) === 1) {//是不是都是数组
+                    return false;
+                }
+                if (Array.isArray(a)) {//都是数组
+                    if(a.length !== b.length) {
+                        return false;
+                    }
+                }
+                let keysa = Object.keys(a),  keysb = Object.keys(b);//属性名的集合
+                if(keysa.length !== keysb.length) return false;//判断长度
+
+                for(let idx of keysa) {
+                    if(!(idx in b)) return false;//判断属性值为undefine的例外情况，比如{b: undefiend}和{c: undefined}
+                    if(!isEqual(a[idx], b[idx])) {
+                        return false;
+                    } //else return true;空数组返回undefined;
+                }
+
+                return true;
+            }  else return a === b;//原始类型
+        }
+    }
+
+
     return {
+        fromPairs: fromPairs,
+        flatten: flatten,
+        flattenDeep: flattenDeep,
+        flattenDepth: flattenDepth,
+        findLastIndex: findLastIndex,
+        isEqual: isEqual,
+        toPath: toPath,
         chunk: chunk,
         compact: compact,
         difference: difference,
         drop: drop,
         dropRight: dropRight,
+        dropRightWhile: dropRightWhile,
+        dropWhile: dropWhile,
         uniq: uniq,
         uniqBy: uniqBy,
         zip: zip,
@@ -278,7 +525,20 @@ var celestial_plato = function () {
         reverse: reverse,
         slice: slice,
         groupBy: groupBy,
-        countBy: countBy
-
+        countBy: countBy,
+        head: head,
+        indexOf: indexOf,
+        intersection: intersection,
+        intersectionBy: intersectionBy,
+        intersectionWith: intersectionWith,
+        join: join,
+        last: last,
+        lastIndexOf: lastIndexOf,
+        nth: nth,
+        pull: pull,
+        pullAll: pullAll,
+        pullAllWith: pullAllWith,
+        pullAt: pullAt,
+        remove: remove
     }
 }();
