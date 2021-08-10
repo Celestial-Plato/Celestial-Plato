@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    
+    svg {
+      border: 1px solid gray;
+      border-radius: 10px;
+    }
+
+    #colorInput {
+      position: absolute;
+      top: 64px;    
+      left: 560px;
+    }
+
+    #numberInput {
+      position: absolute;
+      left: 560px;
+      top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <svg width=500 height="500"></svg>
+  <br>
+  <input type = "number" id = "numberInput" title = "Select the width!">
+  <input type = "color" id = "colorInput" title = "Select the color!">
+
+  <script>
+    var draw = false
+    var svg = document.querySelector('svg')
+
+    var lastpos = null
+
+    document.addEventListener('mousedown', function(e) {
+      function drawDot(e) {
+        var pos = mousePos(svg)
+
+        var line = document.createElementNS("http://www.w3.org/2000/svg", 'line')
+
+        if (lastpos == null) {
+          line.setAttribute('x1', pos.x)
+          line.setAttribute('y1', pos.y)
+        } else {
+          line.setAttribute('x1', lastpos.x)
+          line.setAttribute('y1', lastpos.y)
+        }
+
+        line.setAttribute('x2', pos.x)
+        line.setAttribute('y2', pos.y)
+        line.setAttribute('stroke', colorInput.value)
+        line.setAttribute('stroke-width', numberInput.value)
+        line.setAttribute("stroke-linecap","round")
+
+        lastpos = pos
+
+        svg.append(line)
+      }
+      document.addEventListener('mousemove', drawDot)
+      document.addEventListener('mouseup', function once() {
+        lastpos = null
+        document.removeEventListener('mouseup', once)
+        document.removeEventListener('mousemove', drawDot)
+      })
+    })
+
+    addEventListener('keydown', function(e) {
+        if (e.key == 'z' && e.ctrlKey == true) {
+          console.log(e)
+          svg.removeChild(svg.lastElementChild)
+        }
+      })
+
+    // d3.js里的一个函数
+    function mousePos(node) {
+      var box = node.getBoundingClientRect()
+
+      return {
+        x: window.event.clientX - box.x,
+        y: window.event.clientY - box.y,
+      }
+    }
+  </script>
+</body>
+</html>
