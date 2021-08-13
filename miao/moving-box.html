@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 50px;
+            height: 50px;
+            background-color: gold;
+            position: absolute;
+            border-radius: 15%;
+            box-shadow: 4px 4px 4px navajowhite inset;
+        }
+
+        #Thea {
+            background-color: rgb(253, 0, 0);
+            position: absolute;
+            border-radius: 15%;
+            box-shadow: 4px 4px 4px rgb(236, 76, 76) inset;
+        }
+    </style>
+</head>
+<body>
+    <div style="top: 50px; left: 50px;"></div>
+    <div style = "top: 150px; left: 150px;" id = "Thea"></div>
+
+    <script>
+        let div = document.querySelector('div')
+        let movex = 0, movey = 0;
+        let pressLeft = false, pressRight = false;
+        let pressUp = false, pressDown = false;
+
+        let vx = 0, vy = 0;
+        let pressa = pressd = pressw = presss = false;
+
+        document.addEventListener('keydown', function(e) {//是在document上加事件
+            console.log(e);
+            if(e.key == "a") {
+                pressa = true;
+                vx = -1;
+            }
+            if(e.key == "d") {
+                pressd = true;
+                vx = 1;
+            }
+            if(e.key == "w") {
+                pressw = true;
+                vy = -1;
+            }
+            if(e.key == "s") {
+                presss = true;
+                vy = 1;
+            }
+            if(e.key == "ArrowRight") {
+                pressRight = true;
+                movex = 1;
+            }
+            if(e.key == "ArrowLeft") {
+                pressLeft = true;
+                movex = -1;
+            }
+            if(e.key == "ArrowUp") {
+                pressUp = true;
+                movey = -1;
+            }
+            if(e.key == "ArrowDown") {
+                pressDown = true;
+                movey = 1;
+            }
+        })
+        document.addEventListener('keyup', function(e) {
+            if(e.key == "d") {
+                vx = 0;
+                if(pressa) {
+                    vx = -1;
+                }
+
+                pressd = false;
+            }
+            if(e.key == "a") {
+                vx = 0;
+                if(pressd) {
+                    vx = 1;
+                }
+
+                pressa = false;
+            }
+            if(e.key == "w") {
+                movey = 0;
+                if(presss) {
+                    vy = -1;
+                }
+
+                pressw = false;
+            }
+            if(e.key == "s") {
+                vy = 0;
+                if(pressw) {
+                    vy = 1;
+                }
+
+                presss = false;
+            }
+
+            if(e.key == "ArrowRight") {
+                movex = 0;
+                if(pressLeft) {
+                    movex = -1;
+                }
+
+                pressRight = false;
+            }
+
+            if(e.key == "ArrowLeft") {
+                vx = 0;
+                if(pressRight) {
+                    vx = 1;
+                }
+
+                pressLeft = false;
+            }
+
+            if(e.key == "ArrowUp") {
+                movey = 0;
+                if(pressDown) {
+                    movey = -1;
+                }
+
+                pressUp = false;
+            }
+            if(e.key == "ArrowDown") {
+                movey = 0;
+                if(pressUp) {
+                    movey = 1;
+                }
+
+                pressDown = false;
+            }
+        })
+        let lastTime = 0;
+        requestAnimationFrame(function animate(time) {
+            let diff = time - lastTime;
+            lastTime = time;
+            if(pressDown && pressLeft || pressDown && pressRight || pressUp && pressLeft || pressUp && pressRight) {
+                div.style.left =  parseFloat(div.style.left) + diff * 0.1 * Math.sqrt(1/2) * movex + 'px'
+                div.style.top =  parseFloat(div.style.top) + diff * 0.1 * Math.sqrt(1/2) * movey + 'px'
+            } else {
+                div.style.left = parseFloat(div.style.left) + diff * 0.1 * movex + 'px'
+                div.style.top = parseFloat(div.style.top) + diff * 0.1 * movey + 'px'
+            }
+
+            if(presss&& pressa || presss && pressd || pressw && pressa || pressw && pressd) {
+                Thea.style.left =  parseFloat(Thea.style.left) + diff * 0.1 * Math.sqrt(1/2) * vx + 'px'
+                Thea.style.top =  parseFloat(Thea.style.top) + diff * 0.1 * Math.sqrt(1/2) * vy + 'px'
+            } else {
+                Thea.style.left = parseFloat(Thea.style.left) + diff * 0.1 * vx + 'px'
+                Thea.style.top = parseFloat(Thea.style.top) + diff * 0.1 * vy + 'px'
+            }
+            requestAnimationFrame(animate);
+        }
+        )
+    </script>
+</body>
+</html>

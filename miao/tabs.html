@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+        padding: 10px;
+        text-indent: 2em;
+        position: absolute;
+        width: 500px;
+        height: 250px;
+        border: 1px solid black;
+        border-radius: 4px;
+    }
+
+    button {
+        margin: 63px;
+        width: 40px;
+    }
+    </style>
+    
+</head>
+<body>
+    <button>希</button>
+    <button>夷</button>
+    <button>微</button>
+    <br>
+    <br>
+    <div style = "color: black;">道冲而用之，或不盈。渊兮似万物之宗。解其纷，和其光，同其尘，湛兮似或存。吾不知谁之子，象帝之先。</div>
+    <div style = "color: transparent;">上善若水。水善利万物而不争，处众人之所恶，故几於道。居善地，心善渊，与善仁，言善信，正善治，事善能，动善时。夫唯不争，故无尤。</div>
+    <div style = "color: transparent;">视之不见名曰夷。听之不闻名曰希。抟之不得名曰微。此三者不可致诘，故混而为一。其上不皦(jiǎo)，其下不昧，绳绳不可名，复归於无物。是谓无状之状，无物之象，是谓惚恍。迎之不见其首，随之不见其後。执古之道以御今之有。能知古始，是谓道纪。</div>
+</body>
+<script>
+    var btns = document.querySelectorAll('button');
+    var divs = document.querySelectorAll('div')
+    btns[0].addEventListener("click", function(e) {
+        Array.from(divs).forEach(it => it.style.color = "transparent");
+        divs[0].style.color = "black";
+    })
+    btns[1].addEventListener("click", function(e) {
+        Array.from(divs).forEach(it => it.style.color = "transparent");
+        divs[1].style.color = "black";
+    })
+    btns[2].addEventListener("click", function(e) {
+        Array.from(divs).forEach(it => it.style.color = "transparent");
+        divs[2].style.color = "black";
+    })
+</script>
+</html>
