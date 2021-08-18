@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>来玩啊！</button>
+    <br>
+    <br>
+</body>
+</html>
+<script>
+
+for(let i = 0; i < 10; i++) { 
+    for(let j = 0; j < 10; j++) {
+        let checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        document.body.append(checkbox);    
+        checkbox.checked = true;
+    }
+    document.body.append(document.createElement('br'));
+}
+
+let boxs = Array.from(document.querySelectorAll('input'));
+var btn = document.querySelector('button');
+
+btn.addEventListener('click', function(e) {
+    gameOfLife();
+});
+
+
+
+    function gameOfLife() {
+        
+        //需要一维数组转化为二维数组
+        let board = [...Array(10)].map(() => Array(10).fill(0));
+
+        for(let i = 0; i < boxs.length; i++) {
+            let y = i % 10;
+            let x = (i - i % 10) / 10;
+            if(boxs[i].checked) {
+                board[x][y] = 1;
+            } else board[x][y] = 0;
+        }
+
+        //数组变换
+        var row = board.length;
+        var col = board[0].length;
+        var neigh = [[-1, -1], [0, -1], [1, -1], [-1, 0], [1,0], [-1, 1], [0, 1], [1, 1]]
+        
+        const result = [...Array(row)].map(() => Array(col).fill(0));
+        for(var i = 0; i < row; i++) {
+            for(var j = 0; j < col; j++) {
+                var count = 0;
+                var cell = board[i][j];
+                neigh.forEach( ([x, y]) => {
+                    let X = x + i, Y = y + j;
+                    if(X >= 0 && Y >= 0 && X < row && Y < col) {
+                        count += board[X][Y];
+                    } 
+                });
+                if(cell == 1 && (count < 2 || count > 3)) result[i][j] = 0;
+                else if(cell == 0 && count == 3) result[i][j] = 1;
+                else result[i][j] = board[i][j];
+            }
+        }
+
+        //checkbox变换；
+        for(let i = 0; i < row; i++) {
+                for(let j = 0; j < col; j++) {
+                   if(result[i][j]) {
+                       boxs[j + i * 10].checked = true;
+                   } else boxs[j + i * 10].checked = false;
+
+                }
+        }
+        return result;
+};
+</script>

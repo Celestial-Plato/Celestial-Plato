@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    var double = false, time;
+    window.addEventListener('dblclick', e => {
+        double = true;
+        time = Date.now()
+    })
+    window.addEventListener('click', e => {
+        if(double) {
+            if(Date.now() - time < 200) console.log("triple-click");
+            double = false;
+        }
+        
+    })
+
+    // var last = [0, 0, 0];
+    // window.addEventListener('click', e => {
+    //     var time = Date.now()
+    //     if(time - last[1] < 200 && last[1] - lst[0] > 200) {
+    //         console.log("click")
+    //     }
+    //     lst[0] = last[1];
+    //     last[1] = last[2];
+    //     last[2] = time;
+    // })
+
+    // var last = 1, id;
+    // window.addEventListener('click', e => {
+    //     var time = Date.time();
+    //     clearTimeout(id);
+    //     id = setTimeout()
+    //     if(tiem - last < 200) {
+    //         c++;
+    //     }
+    //
+    // })
+
+    // window.addEventListener('click', e => {
+        // console.log(e.detail)
+    // })
+</script>
+</html>

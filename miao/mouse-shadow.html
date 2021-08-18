@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            width: 20px;
+            height: 20px;
+            background-color: rgb(85, 129, 233);
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <span style = "left: 0; top: 0"></span>
+    <span style = "left: 0; top: 0"></span>
+    <span style = "left: 0; top: 0"></span>
+    <span style = "left: 0; top: 0"></span>
+    <span style = "left: 0; top: 0"></span>
+    
+
+    <script>
+        var spans = document.querySelectorAll("span"), posX = -1000, posY = -1000;
+        addEventListener('mousemove', function(e) {
+            posX = e.pageX;
+            posY = e.pageY;
+             })
+
+        requestAnimationFrame(function animate(time) {
+            var angle = time * 0.01;
+            for(let span of spans) {
+            span.style.left = posX + Math.cos(angle) * 100 + 'px';
+            span.style.top = posY + Math.sin(angle) * 100 + 'px';
+            angle += Math.PI * 2 / spans.length;
+            }
+            requestAnimationFrame(animate);
+        })
+
+        
+       //$0.focus()和$0.click()，$0.blur模拟用户操作
+       //$0.dispatchEvent
+
+    </script>
+</body>
+</html>

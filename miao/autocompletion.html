@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-size: 20px;
+        }
+        #field {
+            font-family: 'Times New Roman', Times, serif;
+        }
+        span {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="field" >
+    <div id="suggestions" style="cursor: pointer"></div>
+</body>
+
+    <script>
+        var terms = [];
+        //候选对象
+        for (var name in window)
+            terms.push(name);
+        //输入一个字符后，检查里面有没有
+        field.addEventListener("input", function(e) {
+            suggestions.innerHTML = ''
+            var val = this.value;
+            terms.forEach(it => {
+                if(it.indexOf(val) == 0) {
+                    let cand = document.createElement('span');
+                    cand.innerText = it;
+                    cand.value = it;
+                    suggestions.append(cand);
+                    console.log(cand.value)
+                }
+            })
+        })
+        //点击后填入内容；
+        suggestions.addEventListener('click', function(e) {
+            field.value = e.target.innerText;
+            suggestions.innerHTML = ''
+        })
+    </script>
+</html>
+
+
