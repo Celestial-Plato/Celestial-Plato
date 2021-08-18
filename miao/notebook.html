@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .note {
+      /* width: 100px; */
+      /* height: 100px; */
+      /*background-color: pink;*/
+      position: fixed;
+      user-select: none;
+      border: 1px solid black;
+      vertical-align: top;
+      border-radius: 5px;
+    }
+    textarea {
+      /* border-radius: 2px; */
+      vertical-align: bottom;
+      
+    }
+    .drag {
+      width: 100px;
+      height: 30px;
+      border-radius: 5px;
+    }
+    span {
+      line-height: 30px;
+      margin: 10px;
+      cursor: pointer;
+    }
+    
+  </style>
+</head>
+<body>
+<script>
+
+</script>
+  <div class="note"  style="left: 20px; top: 20px; background: pink" >
+    <div class = "drag" >
+      <span class = "delete">D</span>
+    </div>
+    <textarea name=""  cols="30" rows="10" ></textarea>
+  </div>
+
+  <br>
+  <button id = 'clone'>克隆</button>
+  <button id = 'del'>删除</button>
+  <script>
+
+    //模板；
+    var div = document.querySelector('div')
+    // var drag = div.firstElementChild;
+
+    //事件委托，子元素触发的时候，移动父元素；
+    var maxZindex = 4
+    document.addEventListener('mousedown', function(e) {
+      //最外层函数
+      if (!e.target.classList.contains('note')) {
+        return
+      }
+      //只有在鼠标位于方框内部时才生效；
+
+      var startx = e.clientX
+      var starty = e.clientY
+      //记录鼠标位置
+
+      var el = e.target
+      el.style.zIndex = maxZindex++
+      
+      var elStartx = parseFloat(el.style.left)
+      var elStarty = parseFloat(el.style.top)
+      //记录方框的起始位置（右上角）
+
+      window.addEventListener('mousemove', function move(ev) {
+        if (ev.which === 0 || ev.buttons === 0) {
+          window.removeEventListener('mousemove', move)
+          console.log('remove mousemove')
+          return
+        }
+
+        var curx = ev.clientX
+        var cury = ev.clientY
+        //记录移动时的鼠标位置，减去鼠标按下去时候的位置
+        var dx = curx - startx
+        var dy = cury - starty
+        //由鼠标位置差和方框起始位置计算出方框现在的位置
+        var left = elStartx + dx
+        var top = elStarty + dy
+
+        //限制在框内
+        if (left < 0) {
+          left = 0
+        }
+
+        if (left > window.innerWidth - el.offsetWidth ) {
+          left = window.innerWidth - el.offsetWidth
+        }
+
+        if (top < 0) {
+          top = 0
+        }
+
+        if (top > window.innerHeight - el.offsetHeight ) {
+          top = window.innerHeight - el.offsetHeight
+        }
+
+        el.style.left = left + 'px'
+        el.style.top = top + 'px'
+
+      })
+    })
+
+    //创建一个对象来存储信息，color，top, left, textContent;
+    function saveMessage() {
+      var arr = [];
+      var divs = document.querySelectorAll('.note');
+      for(let elem of divs) {
+        let obj = {}
+        obj['top'] = elem.style.top;
+        obj['left'] = elem.style.left;
+        obj['zIndex'] = elem.style.zIndex;
+        obj['text'] = elem.lastElementChild.value;
+        arr.push(obj);
+      }
+      localStorage.setItem(`info`, JSON.stringify(arr))
+    }
+    //删除效果；
+      document.addEventListener('mousedown', e => {
+        console.log(e.target)
+        if (e.target.classList.contains('delete')) {
+
+          e.target.parentNode.parentNode.remove();
+        }
+      })
+
+    //克隆效果；
+      clone.addEventListener('click', function(e) {
+        cloneNode();
+      })
+      document.addEventListener('click', function(e) {
+        if(e.target) {
+          console.log(e);
+        }
+    })
+
+    function cloneNode() {
+      let node = div.cloneNode(true)
+      document.body.append(node);
+    }
+    //读取信息；
+    function readInfo() {
+      var arr = JSON.parse(localStorage.info);
+      for(var i = 0; i < arr.length; i++) {
+          let node;
+        if(i !== 0) {
+          node = div.cloneNode(true);
+        } else {
+          node = div;
+        }
+
+        let obj = arr[i];//取得一个便签页的信息，构建便签页；
+        node.style.top = obj.top;
+        node.style.left = obj.left;
+        node.style.zIndex = obj.zIndex;
+        node.lastElementChild.value = obj.text;
+
+        if(i !== 0) {
+          document.body.append(node);
+        }
+
+      }
+
+    }
+    //鼠标释放时，保存信息;
+    document.body.addEventListener("mouseup", function(e) {
+      saveMessage();
+    })
+    document.body.addEventListener("keyup", function(e) {
+      saveMessage();
+    })
+
+
+    window.addEventListener("load", function(e) {
+      readInfo();
+
+    })
+    window.addEventListener('storage', function(e) {
+      readInfo();
+    })
+
+
+    
+  </script>
+</body>
+</html>
