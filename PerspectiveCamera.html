@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="three.min.js"></script>
+    <script src="gasp.min.js"></script>
+    <script src="babel.min.js"></script>
+    <script type="text/babel">
+      const imgUrl =
+        "https://pic3.zhimg.com/80/v2-d9592da1a7206f58c2307060e7246e95_1440w.jpg?source=1940ef5c";
+      const imgRatio = 1250 / 1000;
+      const targetCameraZ = 180;
+      const instanceSize = 1;
+      const randRangeZ = 2 * targetCameraZ * 0.99;
+      const initCamaraZ = targetCameraZ / 5;
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true });
+      //创建渲染器对象, alpha表示canvas是否包含透明度, 默认是false;
+      const scene = new THREE.Scene(); //创建场景对象
+      const camera = new THREE.PerspectiveCamera(75, 2, 0.5, 1000);
+      //透视相机, 第一个参数是视野范围fov,第二个参数是画布的宽高比aspect, 默认是300*150px, 或者说2
+      //近平面和远平面
+      //摄像机默认指向Z轴负方向, 上方向朝向Y轴, 立方体放置在坐标原点
+      camera.position.set(0, 0, initCamaraZ);
+
+      function f(x, y, targetZ) {
+        //targetZ是一个随机数
+        const h = 0.5;
+        const d = targetCameraZ;
+        const D = -targetZ + d;
+        //距离d的位置
+        const H = (h / d) * D;
+        const s = H / h;
+        // D/d作为缩放系数
+        return { s, p: new THREE.Vector3(x * s, y * s, targetZ) };
+      }
+
+      const mesh = (() => {
+        const nRow = 256;
+        const nCol = (nRow * imgRatio) | 0;
+        const sz = instanceSize;
+
+        const geom = new THREE.BoxGeometry(sz, sz, sz).translate(
+          //移动几何体
+          //x, y, z上的宽度,高度和深度
+          0,
+          0,
+          -0.5 * sz
+        );
+        const mat = new THREE.MeshBasicMaterial();
+        //基础网格材质
+        const mesh = new THREE.InstancedMesh(geom, mat, nCol * nRow);
+        //网格模型来自哪个几何体,使用InstancedMesh来渲染大量具有相同几何体与材质,但具有不同世界变换的物体,可以减少draw call的数量, 提高程序的整体渲染性能
+        //nCol * cRow表示的是实例的数量;
+        for (let i = 0, c = 0; i < nRow; ++i) {
+          for (let j = 0; j < nCol; ++j) {
+            const { p, s } = f(
+              (j - nCol / 2 + 0.5) * sz,
+              (nRow / 2 - i + 0.5) * sz,
+              THREE.MathUtils.randFloatSpread(randRangeZ) * sz
+              //在区间[-range/2, range/2]之间随机选择一个浮点数
+              //targetZ是个随机数
+            );
+            const m = new THREE.Matrix4()
+              //生成一个四维单位变换矩阵
+              .setPosition(p)
+              //修改单位矩阵的位置向量
+              .multiply(new THREE.Matrix4().makeScale(s, s, s));
+            //进行缩放, 将当前矩阵乘以矩阵M
+            mesh.setMatrixAt(c, m);
+            //c表示的是实例的索引, m表示的是已定义的实例的本地变换矩阵
+            mesh.setColorAt(c, new THREE.Color("white"));
+            ++c;
+          }
+        }
+        mesh.instanceMatrix.needsUpdate = true;
+        //表示当前attribute已经被修改过, 需要更新
+        mesh.instanceColor.needsUpdate = true;
+        return mesh;
+      })();
+      scene.add(mesh);
+      //给场景插入网格模型,将网格模型作为scene子对象的元素, 给几何体一个材质
+
+      {
+        const img = new Image();
+        img.onload = () => {
+          const { width, height } = img;
+          //取图片的值, 详细信息可以查询HTML中img标签的width和height的定义
+          const can = document.createElement("canvas");
+          can.height = 256;
+          can.width = (can.height * imgRatio) | 0;
+          const ctx = can.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height, 0, 0, can.width, can.height);
+          //void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+          const { data } = ctx.getImageData(0, 0, can.width, can.height);
+          console.log(data.length);
+          //获取图像数据,放回一个ImageDate对象, 有三个属性, height, width和data
+          //ImageData.data是一个一维数组, 包含以RGBA顺序的数据, 数据使用0至255(包含)的整数表示
+          const c = new THREE.Color();
+          //默认为白色
+          const total = data.length >> 2;
+          //获取每一个像素
+
+          for (let i = 0; i < total; ++i) {
+            mesh.setColorAt(
+              i,
+              //实例的索引
+              c.setRGB(
+                data[i * 4 + 0] / 255,
+                //第i个像素(R)
+                data[i * 4 + 1] / 255,
+                data[i * 4 + 2] / 255
+              )
+            );
+          }
+          mesh.instanceColor.needsUpdate = true;
+        };
+        img.crossOrigin = "";
+        img.src = imgUrl;
+      }
+
+      // ----
+      // 渲染
+      // ----
+
+      renderer.setAnimationLoop(() => {
+        renderer.render(scene, camera);
+        //渲染器将场景和相机作为参数
+        //每个可用帧都会调用函数
+      });
+
+      // ----
+      // 视图
+      // ----
+
+      function resize(w, h, dpr = devicePixelRatio) {
+        renderer.setPixelRatio(dpr);
+        //设置设备像素比, 表示的是未缩放状态下, 物理像素和CSS像素的初始比例关系  设备像素比 = 物理像素/设备独立像素(CSS像素)
+        renderer.setSize(w, h, false);
+        //设置渲染区域尺寸
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        //对大多数属性修改后, 需要调用这个函数进行更新
+      }
+      //渲染得到一个canvas对象
+      addEventListener("resize", () => resize(innerWidth, innerHeight));
+      dispatchEvent(new Event("resize"));
+      document.body.prepend(renderer.domElement);
+
+      //domElement由渲染器的构造函数自动创建(如果没有传入canvas参数), 这行代码的意思是将它加到页面中去;
+
+      // ----
+      // 滚动
+      // ----
+
+      function setCamPos() {
+        const H = document.documentElement.offsetHeight - window.innerHeight;
+        const r = window.scrollY / H;
+        //文档在垂直方向上已滚动的像素值/总共可滚动的像素值
+        const z = initCamaraZ + (targetCameraZ - initCamaraZ) * r;
+        //根据滚动, 按比例移动相机
+        gsap.killTweensOf(camera.position);
+        gsap.to(camera.position, { z }); //duration的默认值是0.5
+      }
+      document.addEventListener("scroll", setCamPos);
+    </script>
+    <style>
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100vh;
+      }
+      /* 网格对象可以理解为用一种特定的材质来绘制一个特定的几何体 */
+      :root {
+        scroll-behavior: smooth;
+        /* 实现页内跳转的平滑滚动 */
+      }
+      body {
+        background: black;
+        display: flex;
+        flex-flow: column;
+        background: #222;
+      }
+
+      article {
+        opacity: 0;
+        margin-block: 10vh;
+      }
+      article:last-of-type {
+        opacity: 0;
+        margin-block: 80vh;
+      }
+    </style>
+  </head>
+  <body>
+    <article></article>
+    <article></article>
+    <article></article>
+  </body>
+</html>
